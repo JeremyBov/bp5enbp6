@@ -15,7 +15,7 @@ public class DBconnector {
         Connection conn = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String strConnectionString = "jdbc:mysql://localhost:3306/bp5";
+            String strConnectionString = "jdbc:mysql://localhost:3306/beroepsproduct blok 6";
             conn = DriverManager.getConnection(strConnectionString,"root","password");
             
         } catch(Exception e){

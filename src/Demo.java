@@ -9,7 +9,7 @@ public class Demo extends Application {
    
 public void start(Stage primaryStage) {
         FlowPane root = new FlowPane();
-        Scene scene = new Scene(root, 700, 500);
+        Scene scene = new Scene(root, 900, 500);
         new Grafiek1 (root); 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Beroepsproduct5+6");
@@ -29,17 +29,17 @@ Connection myConn = null;
 
         try {
             // 1. Get a connection to database
-            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bp5", user, pass);
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/beroepsproduct blok 6", user, pass);
 
             // 2. Create a statement
             myStmt = myConn.createStatement();
 
             // 3. Execute SQL query
-            myRs = myStmt.executeQuery("select * from weersensoren_meting");
+            myRs = myStmt.executeQuery("select * from meting_bewegingsensor");
 
             // 4. Process the result set
             while (myRs.next()) {
-                System.out.println(myRs.getString("temperatuur") + ", " + myRs.getString("luchtvochtigheid"));
+                System.out.println(myRs.getString("TriggerID") + ", " + myRs.getString("BewegingTijd"));
             }
 
         } catch (Exception exc) {
