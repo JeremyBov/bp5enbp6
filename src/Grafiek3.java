@@ -7,20 +7,19 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
  
-public class Grafiek1 {
+public class Grafiek3 {
     final static String maandag = "Maandag";
     final static String dinsdag = "Dinsdag";
     final static String woensdag = "Woensdag";
     final static String donderdag = "Donderdag";
     final static String vrijdag = "Vrijdag";
-    final private Button button1,button2;
+    final private Button button1;
     private final DBconnector connector;
     int maandagint,dinsdagint,woensdagint,donderdagint,vrijdagint;
     
-    public Grafiek1 (FlowPane p) {
+    public Grafiek3 (FlowPane p) {
         connector = new DBconnector();
-        button1 = new Button("Data per week");
-        button2 = new Button("Data per maand");
+        button1 = new Button();
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String,Number> bc = 
@@ -41,8 +40,7 @@ public class Grafiek1 {
         } catch (SQLException e) {
             e.printStackTrace();
         } 
-String dinsdag1 = "SELECT MIN(TEMPERATUUR) TEMPERATUUR FROM weersensoren_meting WHERE tijd ='dinsdag'"; 
-//SELECT triggerid from waarneming where EXTRACT(DAY FROM tijd)=1 and EXTRACT(MONTH FROM tijd)=1
+String dinsdag1 = "SELECT TEMPERATUUR FROM weersensoren_meting WHERE tijd ='dinsdag'";        
  ResultSet res2 = connector.getData(dinsdag1);    
 try { while (res2.next()) {
                 String strnaam = res2.getString("temperatuur");
@@ -76,12 +74,10 @@ try { while (res2.next()) {
         
      button1.setOnAction(event -> {
             p.getChildren().clear();
-            new Grafiek2 (p);});
-      button2.setOnAction(event -> {
-            p.getChildren().clear();
-            new Grafiek3 (p);});
+            new Grafiek1 (p);    
+       });
        bc.getData().addAll(series1);
-        p.getChildren().addAll(bc, button1, button2);
+        p.getChildren().addAll(bc, button1);
     }
 
 }
