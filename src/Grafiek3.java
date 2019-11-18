@@ -19,7 +19,7 @@ public class Grafiek3 {
     
     public Grafiek3 (FlowPane p) {
         connector = new DBconnector();
-        button1 = new Button();
+        button1 = new Button("terug naar Data per dag");
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String,Number> bc = 

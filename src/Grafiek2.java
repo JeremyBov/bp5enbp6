@@ -25,7 +25,7 @@ public class Grafiek2 {
     
     public Grafiek2 (FlowPane p) {
         connector = new DBconnector();
-        button1 = new Button();
+        button1 = new Button("terug naar Data per dag");
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String,Number> bc = 
@@ -115,7 +115,7 @@ try { while (res10.next()) {
 vrijdagint3 = vrijdagint - vrijdagint2 +1;
 
         XYChart.Series series1 = new XYChart.Series();
-        series1.setName("temperatuur per dag");       
+        series1.setName("Aantal Personen per dag");       
         series1.getData().add(new XYChart.Data(maandag, maandagint3));
         series1.getData().add(new XYChart.Data(dinsdag, dinsdagint3));
         series1.getData().add(new XYChart.Data(woensdag, woensdagint3));
