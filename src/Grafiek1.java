@@ -15,7 +15,7 @@ public class Grafiek1 {
     final static String vrijdag = "Vrijdag";
     final static String zaterdag = "Zaterdag";
     final static String zondag = "Zondag";
-    final private Button button1, button2;
+    final private Button button1, button2, buttonrefresh;
     private final DBconnector connector;
     int maandagint,maandagint2,maandagint3,
             dinsdagint, dinsdagint2, dinsdagint3,
@@ -29,6 +29,7 @@ public class Grafiek1 {
         connector = new DBconnector();
         button1 = new Button("Weergeven data per Maand");
         button2 = new Button("Weergeven data per Maand");
+        buttonrefresh = new Button("refresh");
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String,Number> bc = 
@@ -117,14 +118,14 @@ try { while (res10.next()) {
             e.printStackTrace();} 
 vrijdagint3 = vrijdagint - vrijdagint2 +1;
 
-String zaterdag1 = "SELECT MAX(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 5 and EXTRACT(MONTH FROM BewegingTijd)=1";        
+String zaterdag1 = "SELECT MAX(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 6 and EXTRACT(MONTH FROM BewegingTijd)=1";        
  ResultSet res11 = connector.getData(zaterdag1);    
 try { while (res11.next()) {
                 String strnaam = res11.getString("triggerid");
                 zaterdagint = Integer.parseInt(strnaam);}
         } catch (SQLException e) {
             e.printStackTrace();} 
-String zaterdag2 = "SELECT MIN(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 5 and EXTRACT(MONTH FROM BewegingTijd)=1";        
+String zaterdag2 = "SELECT MIN(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 6 and EXTRACT(MONTH FROM BewegingTijd)=1";        
  ResultSet res12 = connector.getData(zaterdag2);    
 try { while (res12.next()) {
                 String strnaam = res12.getString("triggerid");
@@ -133,14 +134,14 @@ try { while (res12.next()) {
             e.printStackTrace();} 
 zaterdagint3 = zaterdagint - zaterdagint2 +1;
 
-String zondag1 = "SELECT MAX(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 5 and EXTRACT(MONTH FROM BewegingTijd)=1";        
+String zondag1 = "SELECT MAX(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 7 and EXTRACT(MONTH FROM BewegingTijd)=1";        
  ResultSet res13 = connector.getData(zondag1);    
 try { while (res13.next()) {
                 String strnaam = res13.getString("triggerid");
                 zondagint = Integer.parseInt(strnaam);}
         } catch (SQLException e) {
             e.printStackTrace();} 
-String zondag2 = "SELECT MIN(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 5 and EXTRACT(MONTH FROM BewegingTijd)=1";        
+String zondag2 = "SELECT MIN(TriggerID) TriggerID from meting_bewegingsensor where EXTRACT(DAY FROM BewegingTijd)= 7 and EXTRACT(MONTH FROM BewegingTijd)=1";        
  ResultSet res14 = connector.getData(zondag2);    
 try { while (res14.next()) {
                 String strnaam = res14.getString("triggerid");
@@ -165,8 +166,12 @@ zondagint3 = zondagint - zondagint2 +1;
             p.getChildren().clear();
             new Grafiek2 (p);    
        });
+     buttonrefresh.setOnAction(event -> {
+            p.getChildren().clear();
+            new Grafiek1 (p);    
+       });
        bc.getData().addAll(series1);
-        p.getChildren().addAll(bc, button1, button2);
+        p.getChildren().addAll(bc, button1, button2, buttonrefresh);
     }
 
 }
